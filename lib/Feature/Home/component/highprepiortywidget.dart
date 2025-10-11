@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:tasky/core/widgets/customCheckBox.dart';
 import 'package:tasky/model/task_model.dart';
-import 'package:tasky/screens/highperiorty_screen.dart';
+import 'package:tasky/Feature/Highpriority/highperiorty_screen.dart';
 
 // ignore: must_be_immutable
 class Highprepiortywidget extends StatefulWidget {

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:tasky/core/theme/themecontroller.dart';
-import 'package:tasky/screens/complete_screen.dart';
-import 'package:tasky/screens/home_Screen.dart';
-import 'package:tasky/screens/profile_screen.dart';
-import 'package:tasky/screens/todo_screen.dart';
+import 'package:tasky/Feature/Tasks/complete_screen.dart';
+import 'package:tasky/Feature/Home/home_Screen.dart';
+import 'package:tasky/Feature/Profile/profile_screen.dart';
+import 'package:tasky/Feature/Tasks/todo_screen.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});

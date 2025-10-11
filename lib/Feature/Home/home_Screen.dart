@@ -1,12 +1,12 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:tasky/Feature/Home/component/highprepiortywidget.dart';
 import 'package:tasky/core/services/prefrence_manager.dart';
-import 'package:tasky/screens/add_task.dart';
+import 'package:tasky/Feature/addTask/add_task.dart';
 import 'package:tasky/model/task_model.dart';
-import 'package:tasky/widget/archived_task.dart';
-import 'package:tasky/widget/highprepiortywidget.dart';
-import 'package:tasky/widget/task_list_widget.dart';
+import 'package:tasky/Feature/Home/component/archived_task.dart';
+import 'package:tasky/core/component/task_list_widget.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});

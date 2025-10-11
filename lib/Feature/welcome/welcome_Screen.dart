@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:tasky/core/services/prefrence_manager.dart';
 import 'package:tasky/core/widgets/custom_form_field.dart';
-import 'package:tasky/screens/main_screen.dart';
+import 'package:tasky/Feature/main/main_screen.dart';
 
 // ignore: must_be_immutable
 class WelcomeScreen extends StatelessWidget {

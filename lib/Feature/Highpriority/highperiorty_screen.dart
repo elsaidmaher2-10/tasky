@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:tasky/core/services/prefrence_manager.dart';
 import 'package:tasky/model/task_model.dart';
-import 'package:tasky/widget/task_list_widget.dart';
+import 'package:tasky/core/component/task_list_widget.dart';
 
 class HighperiortyScreen extends StatefulWidget {
   const HighperiortyScreen({super.key});

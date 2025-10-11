@@ -3,8 +3,8 @@ import 'package:tasky/core/services/prefrence_manager.dart';
 import 'package:tasky/core/theme/dark_theme.dart';
 import 'package:tasky/core/theme/light_theme.dart';
 import 'package:tasky/core/theme/themecontroller.dart';
-import 'package:tasky/screens/main_screen.dart';
-import 'package:tasky/screens/welcome_Screen.dart';
+import 'package:tasky/Feature/main/main_screen.dart';
+import 'package:tasky/Feature/welcome/welcome_Screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

@@ -3,18 +3,37 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:tasky/core/services/prefrence_manager.dart';
 import 'package:tasky/model/task_model.dart';
-import 'package:tasky/widget/task_list_widget.dart';
+import 'package:tasky/core/component/task_list_widget.dart';
 
-class TodoScreen extends StatefulWidget {
-  const TodoScreen({super.key});
+class CompleteScreen extends StatefulWidget {
+  const CompleteScreen({super.key});
 
   @override
-  State<TodoScreen> createState() => _TodoScreenState();
+  State<CompleteScreen> createState() => _CompleteScreenState();
 }
 
-class _TodoScreenState extends State<TodoScreen> {
-  List<TaskModel> todotasks = [];
+class _CompleteScreenState extends State<CompleteScreen> {
+  List<TaskModel> completeTasks = [];
   List<TaskModel> finaltasks = [];
+
+  _load_complete_tasks() async {
+    String? tasks = PrefrenceManager().getstring("task");
+    if (tasks != null) {
+      setState(() {
+        final tasksDecoded = jsonDecode(tasks) as List;
+        finaltasks = tasksDecoded.map((e) => TaskModel.fromJson(e)).toList();
+
+        completeTasks = finaltasks.where((e) {
+          return e.ischecked == true;
+        }).toList();
+      });
+    } else {
+      completeTasks = [];
+
+      finaltasks = [];
+    }
+  }
+
   Future<void> onDelete(id) async {
     setState(() {
       finaltasks.removeWhere((e) => e.id == id);
@@ -26,27 +45,9 @@ class _TodoScreenState extends State<TodoScreen> {
     });
   }
 
-  _load_tasks() async {
-    String? tasks = PrefrenceManager().getstring("task");
-    if (tasks != null) {
-      setState(() {
-        final tasksDecoded = jsonDecode(tasks) as List;
-        finaltasks = tasksDecoded.map((e) => TaskModel.fromJson(e)).toList();
-
-        todotasks = finaltasks.where((e) {
-          return e.ischecked == false;
-        }).toList();
-      });
-    } else {
-      todotasks = [];
-
-      finaltasks = [];
-    }
-  }
-
   @override
   void initState() {
-    _load_tasks();
+    _load_complete_tasks();
 
     super.initState();
   }
@@ -57,15 +58,17 @@ class _TodoScreenState extends State<TodoScreen> {
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: TaskListWidget(
-          tasks: todotasks,
+          tasks: completeTasks,
           ontap: (value, index) async {
             int currentindex = finaltasks.indexWhere((e) {
-              return e.id == todotasks[index!].id;
+              return e.id == completeTasks[index!].id;
             });
 
             setState(() {
-              todotasks[index!].ischecked = value;
-              finaltasks[currentindex].ischecked = todotasks[index].ischecked;
+              completeTasks[index!].ischecked = value;
+
+              finaltasks[currentindex].ischecked =
+                  completeTasks[index].ischecked;
             });
 
             PrefrenceManager().setstring(
@@ -73,18 +76,18 @@ class _TodoScreenState extends State<TodoScreen> {
               jsonEncode(finaltasks.map((e) => e.toJson()).toList()),
             );
 
-            _load_tasks();
+            _load_complete_tasks();
           },
           onDelete: (int p1) {
             onDelete(p1);
-            _load_tasks();
+            _load_complete_tasks();
           },
           onedit: () {
-            _load_tasks();
+            _load_complete_tasks();
           },
         ),
       ),
-      appBar: AppBar(title: Text("To Do tasks")),
+      appBar: AppBar(title: Text("Complete tasks")),
     );
   }
 }
