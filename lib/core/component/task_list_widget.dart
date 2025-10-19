@@ -176,7 +176,7 @@ class _TaskListWidgetState extends State<TaskListWidget> {
   }
 
   Future showmodalbottomsheet(BuildContext context, TaskModel task) {
-    GlobalKey<FormState> _globalKey = GlobalKey();
+    GlobalKey<FormState> globalKey = GlobalKey();
     TextEditingController tasknamecontroller = TextEditingController(
       text: task.taskname,
     );
@@ -195,7 +195,7 @@ class _TaskListWidgetState extends State<TaskListWidget> {
                 vertical: 16,
               ),
               child: Form(
-                key: _globalKey,
+                key: globalKey,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -271,7 +271,7 @@ class _TaskListWidgetState extends State<TaskListWidget> {
                         foregroundColor: Color(0xffFFFCFC),
                       ),
                       onPressed: () async {
-                        if (_globalKey.currentState?.validate() ?? false) {
+                        if (globalKey.currentState?.validate() ?? false) {
                           List tasks = [];
 
                           final listTasks = PrefrenceManager().getstring(

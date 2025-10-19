@@ -4,6 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:tasky/core/constant/storage_keys.dart';
 import 'package:tasky/core/services/prefrence_manager.dart';
 import 'package:tasky/core/theme/themecontroller.dart';
 import 'package:tasky/main.dart';
@@ -24,7 +25,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   Future<void> _loadusername() async {
     setState(() {
-      name = PrefrenceManager().getstring("username") ?? "";
+      name = PrefrenceManager().getstring(StorageKeys.username) ?? "";
 
       String? imagePath = PrefrenceManager().getstring("imageprofile");
       if (imagePath != null && imagePath.isNotEmpty) {

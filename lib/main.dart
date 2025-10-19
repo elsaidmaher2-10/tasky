@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tasky/core/constant/storage_keys.dart';
 import 'package:tasky/core/services/prefrence_manager.dart';
 import 'package:tasky/core/theme/dark_theme.dart';
 import 'package:tasky/core/theme/light_theme.dart';
@@ -9,7 +10,7 @@ import 'package:tasky/Feature/welcome/welcome_Screen.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await PrefrenceManager().init();
-  final name = PrefrenceManager().getstring("username");
+  final name = PrefrenceManager().getstring(StorageKeys.username);
   Themecontroller().init();
   runApp(Tasky(name: name));
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tasky/core/constant/storage_keys.dart';
 import 'package:tasky/core/services/prefrence_manager.dart';
 import 'package:tasky/core/widgets/custom_form_field.dart';
 
@@ -66,8 +67,11 @@ class _UserDetailsScreenState extends State<UserDetailsScreen> {
                 foregroundColor: Color(0xffFFFCFC),
               ),
               onPressed: () async {
-                 PrefrenceManager().setstring("username", username.text);
-                 PrefrenceManager().setstring("mvQoute", motivationqoute.text);
+                PrefrenceManager().setstring(
+                  StorageKeys.username,
+                  username.text,
+                );
+                PrefrenceManager().setstring("mvQoute", motivationqoute.text);
                 Navigator.pop(context);
               },
               label: Text(

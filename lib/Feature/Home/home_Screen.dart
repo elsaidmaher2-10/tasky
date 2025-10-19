@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:tasky/Feature/Home/component/highprepiortywidget.dart';
+import 'package:tasky/core/constant/storage_keys.dart';
 import 'package:tasky/core/services/prefrence_manager.dart';
 import 'package:tasky/Feature/addTask/add_task.dart';
 import 'package:tasky/model/task_model.dart';
@@ -34,7 +35,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Future<void> _loadusername() async {
     setState(() {
-      name = PrefrenceManager().getstring("username");
+      name = PrefrenceManager().getstring(StorageKeys.username);
       String? imagePath = PrefrenceManager().getstring("imageprofile");
       if (imagePath != null) {
         selectedimage = File(imagePath);

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:tasky/core/constant/storage_keys.dart';
 import 'package:tasky/core/services/prefrence_manager.dart';
 import 'package:tasky/core/widgets/custom_form_field.dart';
 import 'package:tasky/Feature/main/main_screen.dart';
@@ -102,7 +103,10 @@ class WelcomeScreen extends StatelessWidget {
                   ),
                   onPressed: () async {
                     if (_formKey.currentState?.validate() ?? false) {
-                      PrefrenceManager().setstring("username", controller.text);
+                      PrefrenceManager().setstring(
+                        StorageKeys.username,
+                        controller.text,
+                      );
                       Navigator.push(
                         context,
                         MaterialPageRoute(builder: (ctx) => MainScreen()),
