@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:tasky/core/constant/storage_keys.dart';
 import 'package:tasky/core/enum/item_action_enum.dart';
 import 'package:tasky/core/services/prefrence_manager.dart';
 import 'package:tasky/core/theme/themecontroller.dart';
@@ -275,7 +276,7 @@ class _TaskListWidgetState extends State<TaskListWidget> {
                           List tasks = [];
 
                           final listTasks = PrefrenceManager().getstring(
-                            "task",
+                            StorageKeys.task,
                           );
 
                           if (listTasks != null) {
@@ -296,7 +297,7 @@ class _TaskListWidgetState extends State<TaskListWidget> {
                           tasks[index] = updatedtask.toJson();
                           final taskencode = jsonEncode(tasks);
 
-                          PrefrenceManager().setstring("task", taskencode);
+                          PrefrenceManager().setstring(StorageKeys.task, taskencode);
                           Navigator.pop(context);
                         }
                       },

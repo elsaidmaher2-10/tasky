@@ -7,7 +7,7 @@ import 'package:tasky/core/services/prefrence_manager.dart';
 import 'package:tasky/model/task_model.dart';
 
 class Homecontroller extends ChangeNotifier {
-  List<TaskModel> tasks = [];
+  List<TaskModel> task = [];
   List<TaskModel> completetasks = [];
   List<TaskModel> high_preiorty_tasks = [];
   String? name;
@@ -40,22 +40,22 @@ class Homecontroller extends ChangeNotifier {
   }
 
   void numberofcompeletedTask() {
-    completetasks = tasks.where((e) => e.ischecked == true).toList();
-    if (tasks.isEmpty) {
+    completetasks = task.where((e) => e.ischecked == true).toList();
+    if (task.isEmpty) {
       precetage = 0;
     } else {
-      precetage = (completetasks.length / tasks.length) * 100;
+      precetage = (completetasks.length / task.length) * 100;
     }
     notifyListeners();
   }
 
   Future<void> loadTasks() async {
-    final listTasks = PrefrenceManager().getstring("task");
+    final listTasks = PrefrenceManager().getstring(StorageKeys.task);
     if (listTasks != null) {
       final decodedTasks = jsonDecode(listTasks) as List;
 
-      tasks = decodedTasks.map((e) => TaskModel.fromJson(e)).toList();
-      high_preiorty_tasks = tasks.where((e) {
+      task = decodedTasks.map((e) => TaskModel.fromJson(e)).toList();
+      high_preiorty_tasks = task.where((e) {
         return e.isHighPeriorty == true;
       }).toList();
 
@@ -65,28 +65,28 @@ class Homecontroller extends ChangeNotifier {
   }
 
   Future<void> onDelete(id) async {
-    tasks.removeWhere((e) => e.id == id);
-    final tasksdecode = tasks.map((e) {
+    task.removeWhere((e) => e.id == id);
+    final tasksdecode = task.map((e) {
       return e.toJson();
     }).toList();
 
-    PrefrenceManager().setstring("task", jsonEncode(tasksdecode));
+    PrefrenceManager().setstring(StorageKeys.task, jsonEncode(tasksdecode));
     notifyListeners();
   }
 
   Future<void> donetask(int? p2, bool? p1) async {
-    int currentindex = tasks.indexWhere((e) {
+    int currentindex = task.indexWhere((e) {
       return e.id == high_preiorty_tasks[p2!].id;
     });
-    tasks[currentindex].ischecked = p1;
+    task[currentindex].ischecked = p1;
 
     numberofcompeletedTask();
 
-    print(tasks[currentindex].ischecked);
+    print(task[currentindex].ischecked);
 
     PrefrenceManager().setstring(
-      "task",
-      jsonEncode(tasks.map((e) => e.toJson()).toList()),
+      StorageKeys.task,
+      jsonEncode(task.map((e) => e.toJson()).toList()),
     );
     notifyListeners();
   }

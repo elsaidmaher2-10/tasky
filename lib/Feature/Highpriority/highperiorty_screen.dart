@@ -5,6 +5,8 @@ import 'package:tasky/core/services/prefrence_manager.dart';
 import 'package:tasky/model/task_model.dart';
 import 'package:tasky/core/component/task_list_widget.dart';
 
+import '../../core/constant/storage_keys.dart';
+
 class HighperiortyScreen extends StatefulWidget {
   const HighperiortyScreen({super.key});
 
@@ -23,7 +25,7 @@ class _HighperiortyScreenState extends State<HighperiortyScreen> {
   }
 
   _load_tasks() async {
-    String? tasks = PrefrenceManager().getstring("task");
+    String? tasks = PrefrenceManager().getstring(StorageKeys.task);
     if (tasks != null) {
       setState(() {
         final tasksDecoded = jsonDecode(tasks) as List;
@@ -69,7 +71,7 @@ class _HighperiortyScreenState extends State<HighperiortyScreen> {
             });
 
             PrefrenceManager().setstring(
-              "task",
+              StorageKeys.task,
               jsonEncode(finaltasks.map((e) => e.toJson()).toList()),
             );
 

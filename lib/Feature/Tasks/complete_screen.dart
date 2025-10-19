@@ -5,6 +5,8 @@ import 'package:tasky/core/services/prefrence_manager.dart';
 import 'package:tasky/model/task_model.dart';
 import 'package:tasky/core/component/task_list_widget.dart';
 
+import '../../core/constant/storage_keys.dart';
+
 class CompleteScreen extends StatefulWidget {
   const CompleteScreen({super.key});
 
@@ -17,7 +19,7 @@ class _CompleteScreenState extends State<CompleteScreen> {
   List<TaskModel> finaltasks = [];
 
   _load_complete_tasks() async {
-    String? tasks = PrefrenceManager().getstring("task");
+    String? tasks = PrefrenceManager().getstring(StorageKeys.task);
     if (tasks != null) {
       setState(() {
         final tasksDecoded = jsonDecode(tasks) as List;
@@ -41,7 +43,7 @@ class _CompleteScreenState extends State<CompleteScreen> {
         return e.toJson();
       }).toList();
 
-      PrefrenceManager().setstring("task", jsonEncode(tasks));
+      PrefrenceManager().setstring(StorageKeys.task, jsonEncode(tasks));
     });
   }
 
@@ -72,7 +74,7 @@ class _CompleteScreenState extends State<CompleteScreen> {
             });
 
             PrefrenceManager().setstring(
-              "task",
+              StorageKeys.task,
               jsonEncode(finaltasks.map((e) => e.toJson()).toList()),
             );
 

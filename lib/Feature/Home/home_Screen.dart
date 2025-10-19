@@ -63,7 +63,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Future<void> _loadTasks() async {
-    final listTasks = PrefrenceManager().getstring("task");
+    final listTasks = PrefrenceManager().getstring(StorageKeys.task);
     if (listTasks != null) {
       final decodedTasks = jsonDecode(listTasks) as List;
       setState(() {
@@ -83,7 +83,7 @@ class _HomeScreenState extends State<HomeScreen> {
         return e.toJson();
       }).toList();
 
-      PrefrenceManager().setstring("task", jsonEncode(tasksdecode));
+      PrefrenceManager().setstring(StorageKeys.task, jsonEncode(tasksdecode));
     });
     _loadTasks();
   }
@@ -179,11 +179,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           color: Theme.of(context).colorScheme.primaryContainer,
                           borderRadius: BorderRadius.circular(20),
                         ),
-                        child: archived_task(
-                          completetasks: completetasks,
-                          tasks: tasks,
-                          precetage: precetage,
-                        ),
+                        child: archived_task(),
                       ),
                       const SizedBox(height: 8),
 
@@ -216,7 +212,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               _numberofcompeletedTask();
                             });
                             PrefrenceManager().setstring(
-                              "task",
+                              StorageKeys.task,
                               jsonEncode(tasks.map((e) => e.toJson()).toList()),
                             );
                           },
@@ -252,7 +248,7 @@ class _HomeScreenState extends State<HomeScreen> {
     print(tasks[currentindex].ischecked);
 
     PrefrenceManager().setstring(
-      "task",
+      StorageKeys.task,
       jsonEncode(tasks.map((e) => e.toJson()).toList()),
     );
   }

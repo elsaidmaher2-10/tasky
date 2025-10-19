@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:tasky/core/constant/storage_keys.dart';
 import 'package:tasky/core/services/prefrence_manager.dart';
 import 'package:tasky/core/widgets/custom_form_field.dart';
 import 'package:tasky/model/task_model.dart';
@@ -103,7 +104,7 @@ class _AddTaskState extends State<AddTask> {
                   if (_globalKey.currentState?.validate() ?? false) {
                     List tasks = [];
 
-                    final listTasks = PrefrenceManager().getstring("task");
+                    final listTasks = PrefrenceManager().getstring(StorageKeys.task);
 
                     if (listTasks != null) {
                       tasks = jsonDecode(listTasks);
@@ -119,7 +120,7 @@ class _AddTaskState extends State<AddTask> {
 
                     final taskencode = jsonEncode(tasks);
 
-                    PrefrenceManager().setstring("task", taskencode);
+                    PrefrenceManager().setstring(StorageKeys.task, taskencode);
                     Navigator.pop(context);
                   }
                 },

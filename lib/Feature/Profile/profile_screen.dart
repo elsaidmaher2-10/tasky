@@ -203,7 +203,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               onTap: () async {
                 PrefrenceManager().remove("username");
                 PrefrenceManager().remove("mvQoute");
-                PrefrenceManager().remove("task");
+                PrefrenceManager().remove(StorageKeys.task);
                 Navigator.pushAndRemoveUntil(
                   context,
                   MaterialPageRoute(builder: (ctx) => const Tasky()),
