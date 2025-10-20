@@ -10,10 +10,12 @@ class Taskscontroller extends ChangeNotifier {
     init();
   }
   List<TaskModel> todotasks = [];
-  List<TaskModel> finaltasks = [];
+  List<TaskModel> alltasks = [];
+  List<TaskModel> completeTasks = [];
+
   Future<void> onDelete(id) async {
-    finaltasks.removeWhere((e) => e.id == id);
-    final tasks = finaltasks.map((e) {
+    alltasks.removeWhere((e) => e.id == id);
+    final tasks = alltasks.map((e) {
       return e.toJson();
     }).toList();
 
@@ -22,35 +24,69 @@ class Taskscontroller extends ChangeNotifier {
     notifyListeners();
   }
 
-  changestate(bool? value, int? index) {
-    int currentindex = finaltasks.indexWhere((e) {
+  changetodostate(bool? value, int? index) {
+    int currentindex = alltasks.indexWhere((e) {
       return e.id == todotasks[index!].id;
     });
 
     todotasks[index!].ischecked = value;
-    finaltasks[currentindex].ischecked = todotasks[index].ischecked;
+    alltasks[currentindex].ischecked = todotasks[index].ischecked;
 
     PrefrenceManager().setstring(
       StorageKeys.task,
-      jsonEncode(finaltasks.map((e) => e.toJson()).toList()),
+      jsonEncode(alltasks.map((e) => e.toJson()).toList()),
     );
 
     loadtasks();
+  }
+
+  changecompletetate(bool? value, int? index) {
+    int currentindex = alltasks.indexWhere((e) {
+      return e.id == completeTasks[index!].id;
+    });
+
+    completeTasks[index!].ischecked = value;
+
+    alltasks[currentindex].ischecked = completeTasks[index].ischecked;
+
+    PrefrenceManager().setstring(
+      StorageKeys.task,
+      jsonEncode(alltasks.map((e) => e.toJson()).toList()),
+    );
+
+    loadcompletetasks();
+  }
+
+  loadcompletetasks() async {
+    String? tasks = PrefrenceManager().getstring(StorageKeys.task);
+    if (tasks != null) {
+      final tasksDecoded = jsonDecode(tasks) as List;
+      alltasks = tasksDecoded.map((e) => TaskModel.fromJson(e)).toList();
+
+      completeTasks = alltasks.where((e) {
+        return e.ischecked == true;
+      }).toList();
+    } else {
+      completeTasks = [];
+
+      alltasks = [];
+    }
+    notifyListeners();
   }
 
   loadtasks() async {
     String? tasks = PrefrenceManager().getstring(StorageKeys.task);
     if (tasks != null) {
       final tasksDecoded = jsonDecode(tasks) as List;
-      finaltasks = tasksDecoded.map((e) => TaskModel.fromJson(e)).toList();
+      alltasks = tasksDecoded.map((e) => TaskModel.fromJson(e)).toList();
 
-      todotasks = finaltasks.where((e) {
+      todotasks = alltasks.where((e) {
         return e.ischecked == false;
       }).toList();
     } else {
       todotasks = [];
 
-      finaltasks = [];
+      alltasks = [];
     }
 
     notifyListeners();
@@ -58,5 +94,6 @@ class Taskscontroller extends ChangeNotifier {
 
   init() {
     loadtasks();
+    loadcompletetasks();
   }
 }
