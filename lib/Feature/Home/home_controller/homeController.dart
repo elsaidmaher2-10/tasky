@@ -40,11 +40,13 @@ class Homecontroller extends ChangeNotifier {
   }
 
   void numberofcompeletedTask() {
+    print("1");
     completetasks = task.where((e) => e.ischecked == true).toList();
     if (task.isEmpty) {
       precetage = 0;
     } else {
       precetage = (completetasks.length / task.length) * 100;
+      print(precetage);
     }
     notifyListeners();
   }
@@ -81,8 +83,6 @@ class Homecontroller extends ChangeNotifier {
     task[currentindex].ischecked = p1;
 
     numberofcompeletedTask();
-
-    print(task[currentindex].ischecked);
 
     PrefrenceManager().setstring(
       StorageKeys.task,
