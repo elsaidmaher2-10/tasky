@@ -132,7 +132,6 @@ class _TaskListWidgetState extends State<TaskListWidget> {
                           },
                         ); //
 
-                        // widget.onDelete(widget.tasks[index].id);
                         print(result);
                       }
                     case ItemActionEnum.markAsDone:
