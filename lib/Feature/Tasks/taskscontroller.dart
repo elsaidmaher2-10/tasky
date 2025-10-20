@@ -12,6 +12,65 @@ class Taskscontroller extends ChangeNotifier {
   List<TaskModel> todotasks = [];
   List<TaskModel> alltasks = [];
   List<TaskModel> completeTasks = [];
+  List<TaskModel> highprioritytask = [];
+
+  init() {
+    loadtasks();
+    loadcompletetasks();
+    loadhighpriortytasks();
+  }
+
+  loadcompletetasks() async {
+    String? tasks = PrefrenceManager().getstring(StorageKeys.task);
+    if (tasks != null) {
+      final tasksDecoded = jsonDecode(tasks) as List;
+      alltasks = tasksDecoded.map((e) => TaskModel.fromJson(e)).toList();
+
+      completeTasks = alltasks.where((e) {
+        return e.ischecked == true;
+      }).toList();
+    } else {
+      completeTasks = [];
+
+      alltasks = [];
+    }
+    notifyListeners();
+  }
+
+  loadtasks() async {
+    String? tasks = PrefrenceManager().getstring(StorageKeys.task);
+    if (tasks != null) {
+      final tasksDecoded = jsonDecode(tasks) as List;
+      alltasks = tasksDecoded.map((e) => TaskModel.fromJson(e)).toList();
+
+      todotasks = alltasks.where((e) {
+        return e.ischecked == false;
+      }).toList();
+    } else {
+      todotasks = [];
+
+      alltasks = [];
+    }
+
+    notifyListeners();
+  }
+
+  loadhighpriortytasks() async {
+    String? tasks = PrefrenceManager().getstring(StorageKeys.task);
+    if (tasks != null) {
+      final tasksDecoded = jsonDecode(tasks) as List;
+      alltasks = tasksDecoded.map((e) => TaskModel.fromJson(e)).toList();
+
+      highprioritytask = alltasks.where((e) {
+        return e.isHighPeriorty == true;
+      }).toList();
+    } else {
+      highprioritytask = [];
+      alltasks = [];
+    }
+
+    notifyListeners();
+  }
 
   Future<void> onDelete(id) async {
     alltasks.removeWhere((e) => e.id == id);
@@ -57,43 +116,20 @@ class Taskscontroller extends ChangeNotifier {
     loadcompletetasks();
   }
 
-  loadcompletetasks() async {
-    String? tasks = PrefrenceManager().getstring(StorageKeys.task);
-    if (tasks != null) {
-      final tasksDecoded = jsonDecode(tasks) as List;
-      alltasks = tasksDecoded.map((e) => TaskModel.fromJson(e)).toList();
+  changehighpriortyetate(bool? value, int? index) {
+    int currentindex = alltasks.indexWhere((e) {
+      return e.id == highprioritytask[index!].id;
+    });
 
-      completeTasks = alltasks.where((e) {
-        return e.ischecked == true;
-      }).toList();
-    } else {
-      completeTasks = [];
+    highprioritytask[index!].ischecked = value;
+    alltasks[currentindex].ischecked = highprioritytask[index].ischecked;
 
-      alltasks = [];
-    }
+    PrefrenceManager().setstring(
+      StorageKeys.task,
+      jsonEncode(alltasks.map((e) => e.toJson()).toList()),
+    );
+
+    loadhighpriortytasks();
     notifyListeners();
-  }
-
-  loadtasks() async {
-    String? tasks = PrefrenceManager().getstring(StorageKeys.task);
-    if (tasks != null) {
-      final tasksDecoded = jsonDecode(tasks) as List;
-      alltasks = tasksDecoded.map((e) => TaskModel.fromJson(e)).toList();
-
-      todotasks = alltasks.where((e) {
-        return e.ischecked == false;
-      }).toList();
-    } else {
-      todotasks = [];
-
-      alltasks = [];
-    }
-
-    notifyListeners();
-  }
-
-  init() {
-    loadtasks();
-    loadcompletetasks();
   }
 }

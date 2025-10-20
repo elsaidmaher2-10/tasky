@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:tasky/core/constant/appsizes.dart';
 import 'package:tasky/core/constant/storage_keys.dart';
 import 'package:tasky/core/services/prefrence_manager.dart';
-import 'package:tasky/core/widgets/custom_form_field.dart';
+import 'package:tasky/core/component/custom_form_field.dart';
 import 'package:tasky/Feature/main/main_screen.dart';
 
 // ignore: must_be_immutable
 class WelcomeScreen extends StatelessWidget {
   WelcomeScreen({super.key});
-  TextEditingController controller = TextEditingController();
+  final controller = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
@@ -25,7 +27,7 @@ class WelcomeScreen extends StatelessWidget {
 
                   children: [
                     Image(image: AssetImage("assets/images/logo.png")),
-                    SizedBox(width: 8),
+                    SizedBox(width: Appsizes.w8),
                     Text(
                       "Tasky",
                       style: Theme.of(context).textTheme.displayMedium,
@@ -33,7 +35,7 @@ class WelcomeScreen extends StatelessWidget {
                   ],
                 ),
 
-                SizedBox(height: 118),
+                SizedBox(height: Appsizes.h118),
 
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -46,24 +48,24 @@ class WelcomeScreen extends StatelessWidget {
                     Image(image: AssetImage("assets/images/waving_hand.png")),
                   ],
                 ),
-                SizedBox(height: 8),
+                SizedBox(height: Appsizes.h8),
 
                 Column(
                   children: [
                     Text(
                       "Your productivity journey starts here.",
-                      style: Theme.of(
-                        context,
-                      ).textTheme.displaySmall!.copyWith(fontSize: 16),
+                      style: Theme.of(context).textTheme.displaySmall!.copyWith(
+                        fontSize: Appsizes.fs16,
+                      ),
                     ),
-                    SizedBox(height: 24),
+                    SizedBox(height: Appsizes.h24),
 
                     SvgPicture.asset(
                       "assets/images/pana.svg",
-                      width: 215,
-                      height: 204,
+                      width: Appsizes.w118,
+                      height: Appsizes.h215,
                     ),
-                    SizedBox(height: 24),
+                    SizedBox(height: Appsizes.h24),
                   ],
                 ),
 
@@ -73,12 +75,12 @@ class WelcomeScreen extends StatelessWidget {
                     "Full Name",
                     style: TextStyle(
                       color: Theme.of(context).textTheme.labelSmall!.color,
-                      fontSize: 16,
+                      fontSize: Appsizes.fs16,
                       fontWeight: FontWeight.w400,
                     ),
                   ),
                 ),
-                SizedBox(height: 8),
+                SizedBox(height: Appsizes.h8),
                 CustomFormField(
                   controller: controller,
                   hinttext: "e.g. Sarah Khalid",
@@ -90,11 +92,10 @@ class WelcomeScreen extends StatelessWidget {
                   },
                 ),
 
-                SizedBox(height: 24),
-
+                SizedBox(height: Appsizes.h24),
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    minimumSize: Size(3430, 40),
+                    minimumSize: Size(double.infinity, 40.h),
                     backgroundColor: Color(0xff15B86C),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8),
@@ -115,7 +116,10 @@ class WelcomeScreen extends StatelessWidget {
                   },
                   child: Text(
                     "Let’s Get Started",
-                    style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                    style: TextStyle(
+                      fontSize: Appsizes.fs14,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
               ],

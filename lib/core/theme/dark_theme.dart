@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 ThemeData darktheme = ThemeData(
   colorScheme: ColorScheme.dark(primaryContainer: Color(0xff282828)),
@@ -40,7 +41,7 @@ ThemeData darktheme = ThemeData(
     titleTextStyle: TextStyle(
       color: Color(0xffffffff),
       fontWeight: FontWeight.w400,
-      fontSize: 20,
+      fontSize: 20.sp,
     ),
     backgroundColor: Color(0xff181818),
   ),
@@ -48,42 +49,42 @@ ThemeData darktheme = ThemeData(
   textTheme: TextTheme(
     displayLarge: TextStyle(
       color: Color(0xffFFFFFF),
-      fontSize: 32,
+      fontSize: 32.sp,
       fontWeight: FontWeight.w400,
     ),
     displayMedium: TextStyle(
       color: Color(0xffFFFFFF),
-      fontSize: 28,
+      fontSize: 28.sp,
       fontWeight: FontWeight.w400,
     ),
     displaySmall: TextStyle(
       color: Color(0xffFFFFFF),
-      fontSize: 24,
+      fontSize: 24.sp,
       fontWeight: FontWeight.w400,
     ),
     titleMedium: TextStyle(
       color: Color(0xffFFFCFC),
-      fontSize: 16,
+      fontSize: 16.sp,
       fontWeight: FontWeight.w500,
     ),
     titleSmall: TextStyle(
       color: Color(0xffC6C6C6),
-      fontSize: 14,
+      fontSize: 14.sp,
       fontWeight: FontWeight.w400,
     ),
     headlineMedium: TextStyle(
       color: Color(0xffFFFCFC),
-      fontSize: 16,
+      fontSize: 16.sp,
       fontWeight: FontWeight.w400,
     ),
     headlineSmall: TextStyle(
       color: Color(0xffA0A0A0),
-      fontSize: 16,
+      fontSize: 16.sp,
       decoration: TextDecoration.lineThrough,
       decorationColor: Color(0xff49454F),
       fontWeight: FontWeight.w400,
     ),
-    labelSmall: TextStyle(fontSize: 16, color: Colors.white),
+    labelSmall: TextStyle(fontSize: 16.sp, color: Colors.white),
   ),
 
   inputDecorationTheme: InputDecorationTheme(
@@ -92,7 +93,7 @@ ThemeData darktheme = ThemeData(
     hintStyle: TextStyle(color: Color(0xff6D6D6D)),
     fillColor: Color(0xff282828),
     border: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(16),
+      borderRadius: BorderRadius.circular(16.r),
       borderSide: BorderSide.none,
     ),
   ),
@@ -106,22 +107,26 @@ ThemeData darktheme = ThemeData(
     color: Color(0xff181818),
     elevation: 3,
     labelTextStyle: WidgetStatePropertyAll(
-      TextStyle(fontSize: 16, fontWeight: FontWeight.w400, color: Colors.white),
+      TextStyle(
+        fontSize: 16.sp,
+        fontWeight: FontWeight.w400,
+        color: Colors.white,
+      ),
     ),
     shape: RoundedRectangleBorder(
       side: BorderSide(color: Color(0xff6D6D6D)),
-      borderRadius: BorderRadiusGeometry.circular(16),
+      borderRadius: BorderRadiusGeometry.circular(16.r),
     ),
   ),
   dialogTheme: DialogThemeData(
     contentTextStyle: TextStyle(
       color: Colors.grey,
-      fontSize: 14,
+      fontSize: 14.sp,
       fontWeight: FontWeight.w400,
     ),
     titleTextStyle: TextStyle(
       color: Colors.white,
-      fontSize: 18,
+      fontSize: 18.sp,
       fontWeight: FontWeight.w500,
     ),
   ),

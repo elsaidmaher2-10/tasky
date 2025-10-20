@@ -21,6 +21,7 @@ class PrefrenceManager {
   String? getstring(key) {
     return _pref.getString(key);
   }
+
   Future setbool(key, value) async {
     await _pref.setBool(key, value);
   }
@@ -29,7 +30,9 @@ class PrefrenceManager {
     return _pref.getBool(key);
   }
 
-
+  void clear() {
+    _pref.clear();
+  }
 
   void remove(key) {
     _pref.remove(key);

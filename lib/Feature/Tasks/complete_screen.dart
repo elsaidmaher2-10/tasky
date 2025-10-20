@@ -1,9 +1,8 @@
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tasky/Feature/Tasks/taskscontroller.dart';
 import 'package:tasky/core/component/task_list_widget.dart';
-
+import 'package:tasky/core/constant/appsizes.dart';
 
 class CompleteScreen extends StatelessWidget {
   const CompleteScreen({super.key});
@@ -14,7 +13,7 @@ class CompleteScreen extends StatelessWidget {
       create: (BuildContext context) => Taskscontroller(),
       child: Scaffold(
         body: Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: EdgeInsets.all(Appsizes.pw16),
           child: Consumer<Taskscontroller>(
             builder:
                 (BuildContext context, Taskscontroller value, Widget? child) {

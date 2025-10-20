@@ -4,6 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:tasky/core/constant/appsizes.dart';
 import 'package:tasky/core/constant/storage_keys.dart';
 import 'package:tasky/core/services/prefrence_manager.dart';
 import 'package:tasky/core/theme/themecontroller.dart';
@@ -53,7 +54,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8),
+        padding: EdgeInsets.symmetric(
+          horizontal: Appsizes.pw16,
+          vertical: Appsizes.ph8,
+        ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -61,7 +65,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               "My Profile",
               style: Theme.of(
                 context,
-              ).textTheme.titleMedium!.copyWith(fontSize: 20),
+              ).textTheme.titleMedium!.copyWith(fontSize: Appsizes.fs20),
             ),
             Column(
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -72,7 +76,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   children: [
                     CircleAvatar(
                       backgroundColor: Colors.transparent,
-                      radius: 55,
+                      radius: Appsizes.r55,
                       backgroundImage: selectedimage == null
                           ? const AssetImage("assets/images/person.png")
                           : FileImage(selectedimage!) as ImageProvider,
@@ -114,23 +118,23 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     ),
                   ],
                 ),
-                const SizedBox(height: 8),
+                SizedBox(height: Appsizes.h8),
                 Text(
                   name,
                   style: Theme.of(
                     context,
-                  ).textTheme.titleMedium?.copyWith(fontSize: 20),
+                  ).textTheme.titleMedium?.copyWith(fontSize: Appsizes.fs20),
                 ),
-                const SizedBox(height: 4),
+                SizedBox(height: Appsizes.h4),
                 Text(mvQoute, style: Theme.of(context).textTheme.titleSmall),
               ],
             ),
-            const SizedBox(height: 24),
+            SizedBox(height: Appsizes.h24),
             Text(
               "Profile Info",
               style: Theme.of(
                 context,
-              ).textTheme.titleMedium?.copyWith(fontSize: 20),
+              ).textTheme.titleMedium?.copyWith(fontSize: Appsizes.fs20),
             ),
             ListTile(
               contentPadding: EdgeInsets.zero,
@@ -158,7 +162,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 "Profile",
                 style: Theme.of(
                   context,
-                ).textTheme.titleMedium?.copyWith(fontSize: 16),
+                ).textTheme.titleMedium?.copyWith(fontSize: Appsizes.fs16),
               ),
               trailing: SvgPicture.asset(
                 "assets/images/arrowback.svg",
@@ -186,7 +190,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 "Dark Mode",
                 style: Theme.of(
                   context,
-                ).textTheme.titleMedium?.copyWith(fontSize: 16),
+                ).textTheme.titleMedium?.copyWith(fontSize: Appsizes.fs16),
               ),
               trailing: Switch(
                 value: isDrak,
@@ -224,7 +228,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 "Log Out",
                 style: Theme.of(
                   context,
-                ).textTheme.titleMedium?.copyWith(fontSize: 16),
+                ).textTheme.titleMedium?.copyWith(fontSize: Appsizes.fs16),
               ),
               trailing: SvgPicture.asset(
                 "assets/images/arrowback.svg",

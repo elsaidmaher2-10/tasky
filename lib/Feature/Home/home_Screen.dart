@@ -1,13 +1,13 @@
 import 'dart:convert';
-import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:tasky/Feature/Home/component/highprepiortywidget.dart';
 import 'package:tasky/Feature/Home/home_controller/homeController.dart';
+import 'package:tasky/core/constant/appsizes.dart';
 import 'package:tasky/core/constant/storage_keys.dart';
 import 'package:tasky/core/services/prefrence_manager.dart';
 import 'package:tasky/Feature/addTask/add_task.dart';
-import 'package:tasky/model/task_model.dart';
 import 'package:tasky/Feature/Home/component/archived_task.dart';
 import 'package:tasky/core/component/task_list_widget.dart';
 
@@ -23,11 +23,11 @@ class HomeScreen extends StatelessWidget {
           builder: (BuildContext context, Homecontroller value, Widget? child) {
             return Scaffold(
               floatingActionButton: SizedBox(
-                width: 167,
-                height: 40,
+                width: Appsizes.w167,
+                height: Appsizes.h40,
                 child: FloatingActionButton.extended(
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20),
+                    borderRadius: BorderRadius.circular(20.r),
                   ),
                   icon: const Icon(Icons.add),
                   foregroundColor: Colors.white,
@@ -44,7 +44,7 @@ class HomeScreen extends StatelessWidget {
               ),
               body: SafeArea(
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8),
+                  padding: EdgeInsets.symmetric(horizontal: Appsizes.pw8),
                   child: CustomScrollView(
                     slivers: [
                       SliverList(
@@ -55,7 +55,7 @@ class HomeScreen extends StatelessWidget {
                               Row(
                                 children: [
                                   CircleAvatar(
-                                    radius: 25,
+                                    radius: Appsizes.r25,
                                     backgroundColor: Colors.transparent,
                                     child: Image(
                                       image: value.selectedimage == null
@@ -65,7 +65,7 @@ class HomeScreen extends StatelessWidget {
                                           : FileImage(value.selectedimage!),
                                     ),
                                   ),
-                                  const SizedBox(width: 8),
+                                  SizedBox(width: Appsizes.w8),
                                   Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
@@ -87,7 +87,7 @@ class HomeScreen extends StatelessWidget {
                                 ],
                               ),
 
-                              const SizedBox(height: 16),
+                              SizedBox(height: Appsizes.h16),
 
                               Text(
                                 "Yuhuu, Your work is ",
@@ -109,41 +109,32 @@ class HomeScreen extends StatelessWidget {
                                 ],
                               ),
 
-                              const SizedBox(height: 16),
+                              SizedBox(height: Appsizes.h16),
 
                               Container(
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: 16,
-                                  vertical: 8,
+                                padding: EdgeInsets.symmetric(
+                                  horizontal: Appsizes.pw16,
+                                  vertical: Appsizes.ph8,
                                 ),
-                                height: 72,
+                                height: Appsizes.h72,
                                 decoration: BoxDecoration(
                                   color: Theme.of(
                                     context,
                                   ).colorScheme.primaryContainer,
-                                  borderRadius: BorderRadius.circular(20),
+                                  borderRadius: BorderRadius.circular(
+                                    Appsizes.r20,
+                                  ),
                                 ),
                                 child: archived_task(),
                               ),
-                              const SizedBox(height: 8),
-
-                              Highprepiortywidget(
-                                ontap: (p1, p2) async {
-                                  await value.donetask(p2, p1);
-                                },
-                                tasks: value.high_preiorty_tasks,
-                                refresh: () {
-                                  value.loadTasks();
-                                },
-                              ),
-                              const SizedBox(height: 24),
-
+                              SizedBox(height: Appsizes.h8),
+                              Highprepiortywidget(),
+                              SizedBox(height: Appsizes.h24),
                               Text(
                                 "My Tasks",
                                 style: Theme.of(context).textTheme.titleMedium,
                               ),
-
-                              const SizedBox(height: 16),
+                              SizedBox(height: Appsizes.h16),
 
                               Padding(
                                 padding: const EdgeInsets.only(bottom: 65.0),

@@ -1,12 +1,13 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:tasky/core/constant/appsizes.dart';
 import 'package:tasky/core/constant/storage_keys.dart';
 import 'package:tasky/core/enum/item_action_enum.dart';
 import 'package:tasky/core/services/prefrence_manager.dart';
 import 'package:tasky/core/theme/themecontroller.dart';
-import 'package:tasky/core/widgets/customCheckBox.dart';
-import 'package:tasky/core/widgets/custom_form_field.dart';
+import 'package:tasky/core/component/customCheckBox.dart';
+import 'package:tasky/core/component/custom_form_field.dart';
 import 'package:tasky/model/task_model.dart';
 
 // ignore: must_be_immutable
@@ -35,14 +36,14 @@ class _TaskListWidgetState extends State<TaskListWidget> {
       itemCount: widget.tasks.length,
       itemBuilder: (ctx, index) {
         return Container(
-          padding: EdgeInsets.all(8),
-          height: 72,
+          padding: EdgeInsets.all(Appsizes.pw8),
+          height: Appsizes.h72,
           decoration: BoxDecoration(
             border: Border.all(
               color: Themecontroller.isDark()
                   ? Colors.transparent
                   : Color(0xffD1DAD6),
-              width: 1.5,
+              width: Appsizes.w1,
             ),
             borderRadius: BorderRadius.circular(20),
             color: Theme.of(context).colorScheme.primaryContainer,
@@ -109,7 +110,7 @@ class _TaskListWidgetState extends State<TaskListWidget> {
                                   },
                                   child: Text(
                                     "Cancel",
-                                    style: TextStyle(fontSize: 16),
+                                    style: TextStyle(fontSize: Appsizes.fs16),
                                   ),
                                 ),
                                 TextButton(
@@ -124,15 +125,13 @@ class _TaskListWidgetState extends State<TaskListWidget> {
                                   },
                                   child: Text(
                                     "Delete",
-                                    style: TextStyle(fontSize: 16),
+                                    style: TextStyle(fontSize: Appsizes.fs16),
                                   ),
                                 ),
                               ],
                             );
                           },
                         ); //
-
-                        print(result);
                       }
                     case ItemActionEnum.markAsDone:
                       {
@@ -144,27 +143,6 @@ class _TaskListWidgetState extends State<TaskListWidget> {
                   return PopupMenuItem(value: e, child: Text(e.name));
                 }).toList(),
               ),
-
-              // IconButton(
-              //   onPressed: () {},
-              //   icon: SvgPicture.asset(
-              //     "assets/images/menu.svg",
-              //     colorFilter: ColorFilter.mode(
-              //       widget.tasks[index].ischecked == true
-              //           ? Color(
-              //               Theme.of(
-              //                 context,
-              //               ).textTheme.headlineSmall!.color!.value,
-              //             )
-              //           : Color(
-              //               Theme.of(
-              //                 context,
-              //               ).textTheme.titleSmall!.color!.value,
-              //             ),
-              //       BlendMode.srcIn,
-              //     ),
-              //   ),
-              // ),
             ],
           ),
         );
@@ -190,9 +168,9 @@ class _TaskListWidgetState extends State<TaskListWidget> {
         return StatefulBuilder(
           builder: (BuildContext context, void Function(void Function()) setState) {
             return Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 16.0,
-                vertical: 16,
+              padding: EdgeInsets.symmetric(
+                horizontal: Appsizes.pw16,
+                vertical: Appsizes.p16,
               ),
               child: Form(
                 key: globalKey,
@@ -209,7 +187,7 @@ class _TaskListWidgetState extends State<TaskListWidget> {
                               "Task Name",
                               style: Theme.of(context).textTheme.titleMedium,
                             ),
-                            SizedBox(height: 8),
+                            SizedBox(height: Appsizes.h8),
                             CustomFormField(
                               validator: (value) {
                                 if (value?.isEmpty ?? false) {
@@ -221,13 +199,13 @@ class _TaskListWidgetState extends State<TaskListWidget> {
                               hinttext: 'Finish UI design for login screen',
                             ),
 
-                            SizedBox(height: 16),
+                            SizedBox(height: Appsizes.h16),
 
                             Text(
                               "Task Description",
                               style: Theme.of(context).textTheme.titleMedium,
                             ),
-                            SizedBox(height: 8),
+                            SizedBox(height: Appsizes.h8),
                             CustomFormField(
                               maxLines: 5,
 
@@ -236,7 +214,7 @@ class _TaskListWidgetState extends State<TaskListWidget> {
                               hinttext:
                                   "Finish onboarding UI and hand off to devs by Thursday.",
                             ),
-                            SizedBox(height: 24),
+                            SizedBox(height: Appsizes.h24),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
@@ -263,7 +241,7 @@ class _TaskListWidgetState extends State<TaskListWidget> {
                     ),
                     ElevatedButton.icon(
                       style: ElevatedButton.styleFrom(
-                        minimumSize: Size(3430, 40),
+                        minimumSize: Size(double.infinity, Appsizes.h40),
                         backgroundColor: Color(0xff15B86C),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(8),
@@ -296,21 +274,24 @@ class _TaskListWidgetState extends State<TaskListWidget> {
                           tasks[index] = updatedtask.toJson();
                           final taskencode = jsonEncode(tasks);
 
-                          PrefrenceManager().setstring(StorageKeys.task, taskencode);
+                          PrefrenceManager().setstring(
+                            StorageKeys.task,
+                            taskencode,
+                          );
                           Navigator.pop(context);
                         }
                       },
                       label: Text(
                         "Edit Task",
                         style: TextStyle(
-                          fontSize: 14,
+                          fontSize: Appsizes.fs14,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
 
                       icon: Icon(Icons.add),
                     ),
-                    SizedBox(height: 32),
+                    SizedBox(height: Appsizes.h32),
                   ],
                 ),
               ),

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 ThemeData lighttheme = ThemeData(
   checkboxTheme: CheckboxThemeData(
-    side: BorderSide(width: 2, color: Color(0xffD1DAD6)),
+    side: BorderSide(width: 2.w, color: Color(0xffD1DAD6)),
   ),
   brightness: Brightness.light,
   colorScheme: ColorScheme.light(primaryContainer: Color(0xffFFFFFF)),
@@ -42,7 +43,7 @@ ThemeData lighttheme = ThemeData(
     titleTextStyle: TextStyle(
       color: Color(0xff161F1B),
       fontWeight: FontWeight.w400,
-      fontSize: 20,
+      fontSize: 20.sp,
     ),
     backgroundColor: Color(0xffF6F7F9),
   ),
@@ -50,43 +51,43 @@ ThemeData lighttheme = ThemeData(
   textTheme: TextTheme(
     displayLarge: TextStyle(
       color: Color(0xff161F1B),
-      fontSize: 32,
+      fontSize: 32.sp,
       fontWeight: FontWeight.w400,
     ),
     displayMedium: TextStyle(
       color: Color(0xff161F1B),
-      fontSize: 28,
+      fontSize: 28.sp,
       fontWeight: FontWeight.w400,
     ),
     displaySmall: TextStyle(
       color: Color(0xff161F1B),
-      fontSize: 24,
+      fontSize: 24.sp,
       fontWeight: FontWeight.w400,
     ),
     titleMedium: TextStyle(
       color: Color(0xff161F1B),
-      fontSize: 16,
+      fontSize: 16.sp,
       fontWeight: FontWeight.w500,
     ),
     headlineMedium: TextStyle(
       color: Color(0xff161F1B),
-      fontSize: 16,
+      fontSize: 16.sp,
       fontWeight: FontWeight.w400,
     ),
     headlineSmall: TextStyle(
       color: Color(0xff6A6A6A),
-      fontSize: 16,
+      fontSize: 16.sp,
       decoration: TextDecoration.lineThrough,
       decorationColor: Color(0xff49454F),
       fontWeight: FontWeight.w400,
     ),
     titleSmall: TextStyle(
       color: Color(0xff3A4642),
-      fontSize: 14,
+      fontSize: 14.sp,
       fontWeight: FontWeight.w400,
     ),
 
-    labelSmall: TextStyle(fontSize: 16, color: Colors.black),
+    labelSmall: TextStyle(fontSize: 16.sp, color: Colors.black),
   ),
   inputDecorationTheme: InputDecorationTheme(
     filled: true,
@@ -96,15 +97,15 @@ ThemeData lighttheme = ThemeData(
     fillColor: Color(0xffFFFFFF),
     focusedBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(16),
-      borderSide: BorderSide(color: Color(0xffD1DAD6), width: 1),
+      borderSide: BorderSide(color: Color(0xffD1DAD6), width: 1.w),
     ),
     enabledBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(16),
-      borderSide: BorderSide(color: Color(0xffD1DAD6), width: 1),
+      borderSide: BorderSide(color: Color(0xffD1DAD6), width: 1.w),
     ),
     border: OutlineInputBorder(
       borderRadius: BorderRadius.circular(16),
-      borderSide: BorderSide(color: Color(0xffD1DAD6), width: 1),
+      borderSide: BorderSide(color: Color(0xffD1DAD6), width: 1.w),
     ),
   ),
   splashFactory: NoSplash.splashFactory,
@@ -121,22 +122,22 @@ ThemeData lighttheme = ThemeData(
     color: Color(0xffF6F7F9),
     elevation: 3,
     labelTextStyle: WidgetStatePropertyAll(
-      TextStyle(fontSize: 16, fontWeight: FontWeight.w400, color: Colors.black),
+      TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w400, color: Colors.black),
     ),
     shape: RoundedRectangleBorder(
-      borderRadius: BorderRadiusGeometry.circular(16),
+      borderRadius: BorderRadiusGeometry.circular(16.r),
     ),
   ),
   dialogTheme: DialogThemeData(
-    insetPadding: EdgeInsets.all(16),
+    insetPadding: EdgeInsets.all(16.r),
     contentTextStyle: TextStyle(
       color: Colors.grey.shade700,
-      fontSize: 14,
+      fontSize: 14.sp,
       fontWeight: FontWeight.w400,
     ),
     titleTextStyle: TextStyle(
       color: Colors.black,
-      fontSize: 18,
+      fontSize: 18.sp,
       fontWeight: FontWeight.w500,
     ),
   ),

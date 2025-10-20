@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:tasky/core/constant/appsizes.dart';
 import 'package:tasky/core/constant/storage_keys.dart';
 import 'package:tasky/core/services/prefrence_manager.dart';
-import 'package:tasky/core/widgets/custom_form_field.dart';
+import 'package:tasky/core/component/custom_form_field.dart';
 
 class UserDetailsScreen extends StatefulWidget {
   const UserDetailsScreen({super.key, required this.name});
@@ -27,7 +28,10 @@ class _UserDetailsScreenState extends State<UserDetailsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8),
+        padding: EdgeInsets.symmetric(
+          horizontal: Appsizes.pw16,
+          vertical: Appsizes.ph8,
+        ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -35,22 +39,22 @@ class _UserDetailsScreenState extends State<UserDetailsScreen> {
               "User Name",
               style: TextStyle(
                 color: Color(0xffffffff),
-                fontSize: 16,
+                fontSize: Appsizes.fs16,
                 fontWeight: FontWeight.w400,
               ),
             ),
-            SizedBox(height: 8),
+            SizedBox(height: Appsizes.h8),
             CustomFormField(controller: username, hinttext: "Usama Elgendy"),
-            SizedBox(height: 20),
+            SizedBox(height: Appsizes.h20),
             Text(
               "Motivation Quote",
               style: TextStyle(
                 color: Color(0xffffffff),
-                fontSize: 16,
+                fontSize: Appsizes.fs16,
                 fontWeight: FontWeight.w400,
               ),
             ),
-            SizedBox(height: 8),
+            SizedBox(height: Appsizes.h8),
             CustomFormField(
               maxLines: 5,
               controller: motivationqoute,
@@ -59,10 +63,10 @@ class _UserDetailsScreenState extends State<UserDetailsScreen> {
             Spacer(),
             ElevatedButton.icon(
               style: ElevatedButton.styleFrom(
-                minimumSize: Size(3430, 40),
+                minimumSize: Size(double.infinity, Appsizes.h40),
                 backgroundColor: Color(0xff15B86C),
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8),
+                  borderRadius: BorderRadius.circular(Appsizes.r8),
                 ),
                 foregroundColor: Color(0xffFFFCFC),
               ),
@@ -76,7 +80,10 @@ class _UserDetailsScreenState extends State<UserDetailsScreen> {
               },
               label: Text(
                 "Save Changes",
-                style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                style: TextStyle(
+                  fontSize: Appsizes.fs14,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
 
               icon: Icon(Icons.edit),
@@ -87,7 +94,10 @@ class _UserDetailsScreenState extends State<UserDetailsScreen> {
       appBar: AppBar(
         title: Text(
           "User Details",
-          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+          style: TextStyle(
+            fontSize: Appsizes.fs18,
+            fontWeight: FontWeight.bold,
+          ),
         ),
       ),
     );

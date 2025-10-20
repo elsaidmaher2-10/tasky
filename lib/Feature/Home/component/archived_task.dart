@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:tasky/Feature/Home/home_controller/homeController.dart';
 
@@ -32,10 +33,10 @@ class archived_task extends StatelessWidget {
                 angle: -pi / 2,
 
                 child: SizedBox(
-                  height: 55,
-                  width: 55,
+                  height: 55.h,
+                  width: 55.w,
                   child: CircularProgressIndicator(
-                    strokeWidth: 4.5,
+                    strokeWidth: 4.5.w,
                     value: context.watch<Homecontroller>().task.isEmpty
                         ? 0
                         : context.watch<Homecontroller>().completetasks.length /

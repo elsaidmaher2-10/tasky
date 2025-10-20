@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tasky/Feature/addTask/addtaskController.dart';
-import 'package:tasky/core/widgets/custom_form_field.dart';
+import 'package:tasky/core/constant/appsizes.dart';
+import 'package:tasky/core/component/custom_form_field.dart';
 
 class AddTask extends StatelessWidget {
   const AddTask({super.key});
@@ -17,7 +18,10 @@ class AddTask extends StatelessWidget {
           appBar: AppBar(title: Text("New Task"), centerTitle: false),
 
           body: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8),
+            padding: EdgeInsets.symmetric(
+              horizontal: Appsizes.pw16,
+              vertical: Appsizes.ph8,
+            ),
             child: Form(
               key: addtaskcontroller.globalKey,
               child: Column(
@@ -33,7 +37,7 @@ class AddTask extends StatelessWidget {
                             "Task Name",
                             style: Theme.of(context).textTheme.titleMedium,
                           ),
-                          SizedBox(height: 8),
+                          SizedBox(height: Appsizes.h8),
                           CustomFormField(
                             validator: (value) {
                               if (value?.isEmpty ?? false) {
@@ -45,13 +49,13 @@ class AddTask extends StatelessWidget {
                             hinttext: 'Finish UI design for login screen',
                           ),
 
-                          SizedBox(height: 16),
+                          SizedBox(height: Appsizes.h16),
 
                           Text(
                             "Task Description",
                             style: Theme.of(context).textTheme.titleMedium,
                           ),
-                          SizedBox(height: 8),
+                          SizedBox(height: Appsizes.h8),
                           CustomFormField(
                             maxLines: 5,
 
@@ -96,10 +100,10 @@ class AddTask extends StatelessWidget {
                   ),
                   ElevatedButton.icon(
                     style: ElevatedButton.styleFrom(
-                      minimumSize: Size(3430, 40),
+                      minimumSize: Size(double.infinity, Appsizes.h40),
                       backgroundColor: Color(0xff15B86C),
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8),
+                        borderRadius: BorderRadius.circular(Appsizes.r8),
                       ),
                       foregroundColor: Color(0xffFFFCFC),
                     ),
@@ -109,7 +113,7 @@ class AddTask extends StatelessWidget {
                     label: Text(
                       "Add Task",
                       style: TextStyle(
-                        fontSize: 14,
+                        fontSize: Appsizes.fs14,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
