@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:tasky/core/constant/storage_keys.dart';
+import 'package:tasky/core/services/FileStroageManger.dart';
 import 'package:tasky/core/services/prefrence_manager.dart';
 import 'package:tasky/model/task_model.dart';
 
@@ -21,10 +22,9 @@ class Taskscontroller extends ChangeNotifier {
   }
 
   loadcompletetasks() async {
-    String? tasks = PrefrenceManager().getstring(StorageKeys.task);
-    if (tasks != null) {
-      final tasksDecoded = jsonDecode(tasks) as List;
-      alltasks = tasksDecoded.map((e) => TaskModel.fromJson(e)).toList();
+    final tasks = await FileStroageManager().loadtaks();
+    if (tasks.isNotEmpty) {
+      alltasks = tasks.map((e) => TaskModel.fromJson(e)).toList();
 
       completeTasks = alltasks.where((e) {
         return e.ischecked == true;
@@ -38,10 +38,9 @@ class Taskscontroller extends ChangeNotifier {
   }
 
   loadtasks() async {
-    String? tasks = PrefrenceManager().getstring(StorageKeys.task);
-    if (tasks != null) {
-      final tasksDecoded = jsonDecode(tasks) as List;
-      alltasks = tasksDecoded.map((e) => TaskModel.fromJson(e)).toList();
+    final tasks = await FileStroageManager().loadtaks();
+    if (tasks.isNotEmpty) {
+      alltasks = tasks.map((e) => TaskModel.fromJson(e)).toList();
 
       todotasks = alltasks.where((e) {
         return e.ischecked == false;
@@ -56,10 +55,9 @@ class Taskscontroller extends ChangeNotifier {
   }
 
   loadhighpriortytasks() async {
-    String? tasks = PrefrenceManager().getstring(StorageKeys.task);
-    if (tasks != null) {
-      final tasksDecoded = jsonDecode(tasks) as List;
-      alltasks = tasksDecoded.map((e) => TaskModel.fromJson(e)).toList();
+    final tasks = await FileStroageManager().loadtaks();
+    if (tasks.isNotEmpty) {
+      alltasks = tasks.map((e) => TaskModel.fromJson(e)).toList();
 
       highprioritytask = alltasks.where((e) {
         return e.isHighPeriorty == true;
@@ -77,8 +75,7 @@ class Taskscontroller extends ChangeNotifier {
     final tasks = alltasks.map((e) {
       return e.toJson();
     }).toList();
-
-    PrefrenceManager().setstring(StorageKeys.task, jsonEncode(tasks));
+    FileStroageManager().saveTasks(tasks);
 
     notifyListeners();
   }
@@ -90,11 +87,7 @@ class Taskscontroller extends ChangeNotifier {
 
     todotasks[index!].ischecked = value;
     alltasks[currentindex].ischecked = todotasks[index].ischecked;
-
-    PrefrenceManager().setstring(
-      StorageKeys.task,
-      jsonEncode(alltasks.map((e) => e.toJson()).toList()),
-    );
+    FileStroageManager().saveTasks(alltasks.map((e) => e.toJson()).toList());
 
     loadtasks();
   }
@@ -108,10 +101,7 @@ class Taskscontroller extends ChangeNotifier {
 
     alltasks[currentindex].ischecked = completeTasks[index].ischecked;
 
-    PrefrenceManager().setstring(
-      StorageKeys.task,
-      jsonEncode(alltasks.map((e) => e.toJson()).toList()),
-    );
+    FileStroageManager().saveTasks(alltasks.map((e) => e.toJson()).toList());
 
     loadcompletetasks();
   }
@@ -124,10 +114,7 @@ class Taskscontroller extends ChangeNotifier {
     highprioritytask[index!].ischecked = value;
     alltasks[currentindex].ischecked = highprioritytask[index].ischecked;
 
-    PrefrenceManager().setstring(
-      StorageKeys.task,
-      jsonEncode(alltasks.map((e) => e.toJson()).toList()),
-    );
+    FileStroageManager().saveTasks(alltasks.map((e) => e.toJson()).toList());
 
     loadhighpriortytasks();
     notifyListeners();

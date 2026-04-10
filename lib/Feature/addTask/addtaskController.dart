@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:tasky/core/constant/storage_keys.dart';
+import 'package:tasky/core/services/FileStroageManger.dart';
 import 'package:tasky/core/services/prefrence_manager.dart';
 import 'package:tasky/model/task_model.dart';
 
@@ -32,9 +33,8 @@ class Addtaskcontroller extends ChangeNotifier {
         isHighPeriorty: ishighPreiorty,
       ).toJson();
       tasks.add(task);
-
+      FileStroageManager().saveTasks(tasks);
       final taskencode = jsonEncode(tasks);
-
       PrefrenceManager().setstring(StorageKeys.task, taskencode);
       Navigator.pop(context);
     }

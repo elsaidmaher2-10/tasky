@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:tasky/core/constant/storage_keys.dart';
+import 'package:tasky/core/services/FileStroageManger.dart';
 import 'package:tasky/core/services/prefrence_manager.dart';
 import 'package:tasky/model/task_model.dart';
 
@@ -50,11 +51,9 @@ class Homecontroller extends ChangeNotifier {
   }
 
   Future<void> loadTasks() async {
-    final listTasks = PrefrenceManager().getstring(StorageKeys.task);
-    if (listTasks != null) {
-      final decodedTasks = jsonDecode(listTasks) as List;
-
-      task = decodedTasks.map((e) => TaskModel.fromJson(e)).toList();
+    final listTasks = await FileStroageManager().loadtaks();
+    if (listTasks.isNotEmpty) {
+      task = listTasks.map((e) => TaskModel.fromJson(e)).toList();
       high_preiorty_tasks = task.where((e) {
         return e.isHighPeriorty == true;
       }).toList();
@@ -70,7 +69,7 @@ class Homecontroller extends ChangeNotifier {
       return e.toJson();
     }).toList();
 
-    PrefrenceManager().setstring(StorageKeys.task, jsonEncode(tasksdecode));
+    FileStroageManager().saveTasks(tasksdecode);
     notifyListeners();
   }
 
@@ -81,10 +80,8 @@ class Homecontroller extends ChangeNotifier {
     task[currentindex].ischecked = p1;
 
     numberofcompeletedTask();
-    PrefrenceManager().setstring(
-      StorageKeys.task,
-      jsonEncode(task.map((e) => e.toJson()).toList()),
-    );
+    FileStroageManager().saveTasks(task.map((e) => e.toJson()).toList());
+
     notifyListeners();
   }
 }

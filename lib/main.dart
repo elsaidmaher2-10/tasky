@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:tasky/Feature/Home/home_controller/homeController.dart';
 import 'package:tasky/core/constant/storage_keys.dart';
+import 'package:tasky/core/services/FileStroageManger.dart';
 import 'package:tasky/core/services/prefrence_manager.dart';
 import 'package:tasky/core/theme/dark_theme.dart';
 import 'package:tasky/core/theme/light_theme.dart';
@@ -14,8 +15,8 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await ScreenUtil.ensureScreenSize();
   await PrefrenceManager().init();
-  PrefrenceManager().clear();
-
+  await FileStroageManager().init();
+  FileStroageManager().loadtaks();
   final name = PrefrenceManager().getstring(StorageKeys.username);
   Themecontroller().init();
   runApp(Tasky(name: name));
@@ -26,8 +27,7 @@ class Tasky extends StatelessWidget {
   final String? name;
   @override
   Widget build(BuildContext context) {
-    return
-      ValueListenableBuilder(
+    return ValueListenableBuilder(
       valueListenable: Themecontroller.thememode,
       builder: (context, value, child) {
         return ChangeNotifierProvider(
